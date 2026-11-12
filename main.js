@@ -73,13 +73,6 @@
     addEventListener('scroll', run, { passive: true }); run();
   }
 
-  // schedule filter
-  $$('.chip').forEach(ch => ch.addEventListener('click', () => {
-    $$('.chip').forEach(c => c.classList.toggle('on', c === ch));
-    const f = ch.dataset.f;
-    $$('.row').forEach(r => { r.hidden = f !== 'all' && r.dataset.l !== f; r.classList.add('in'); });
-  }));
-
   // testimonials
   const qs = $$('#quotes blockquote'), dots = $('#dots');
   let qi = 0, timer;
@@ -97,14 +90,8 @@
   const start = () => { clearInterval(timer); if (!reduce) timer = setInterval(() => show((qi + 1) % qs.length), 6500); };
   show(0); start();
 
-  // form (static site: opens the visitor's email client; swap for Formspree/Netlify etc. when ready)
+  // form -> emailed to the teacher via FormSubmit (works on static hosting)
   const form = $('#form'), note = $('.form-note'), TO = 'evanmceldowney@gmail.com';
-  $$('.row a.btn').forEach(a => a.addEventListener('click', () => {
-    const t = $('h3', a.closest('.row')).textContent;
-    const opt = [...form.topic.options].find(o => t.toLowerCase().startsWith(o.text.toLowerCase()));
-    if (opt) form.topic.value = opt.value;
-    form.msg.value = `I'd like to request a ${t.toLowerCase()} on ${$('time', a.closest('.row')).firstChild.textContent}.`;
-  }));
   form.addEventListener('submit', async e => {
     e.preventDefault();
     const d = Object.fromEntries(new FormData(form));

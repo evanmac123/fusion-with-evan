@@ -12,6 +12,5 @@ A one-page static site (HTML, CSS, vanilla JS). No build step.
 
 ## Customise
 - Edit prices, testimonials and copy in `index.html`. Contact form emails go to the address in the form `action` (index.html) and `TO` (main.js) via FormSubmit; the first live submission triggers a one-time activation email.
-- Footer social links were removed; add them back when you have URLs.
 - Swap photos in `assets/img/`. Photography credit: Philip Bell.
 - Colours are CSS variables at the top of `styles.css`.

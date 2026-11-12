@@ -112,9 +112,9 @@
   const form = $('#form'), note = $('.form-note'), TO = 'evanmceldowney@gmail.com';
   $$('.row a.btn').forEach(a => a.addEventListener('click', () => {
     const t = $('h3', a.closest('.row')).textContent;
-    const opt = [...form.topic.options].find(o => t.startsWith(o.text));
+    const opt = [...form.topic.options].find(o => t.toLowerCase().startsWith(o.text.toLowerCase()));
     if (opt) form.topic.value = opt.value;
-    form.msg.value = `I'd like to reserve a spot: ${t}.`;
+    form.msg.value = `I'd like to request a ${t.toLowerCase()} on ${$('time', a.closest('.row')).firstChild.textContent}.`;
   }));
   form.addEventListener('submit', async e => {
     e.preventDefault();
@@ -129,7 +129,7 @@
       form.reset(); note.textContent = 'Thank you! Your message is on its way. I reply personally, usually within a day.';
     } catch {
       const body = `Name: ${d.name}\nEmail: ${d.email}\nInterested in: ${d.topic}\n\n${d.msg || ''}`;
-      location.href = `mailto:${TO}?subject=${encodeURIComponent('Fusion dance enquiry: ' + d.topic)}&body=${encodeURIComponent(body)}`;
+      location.href = `mailto:${TO}?subject=${encodeURIComponent('Private lesson enquiry: ' + d.topic)}&body=${encodeURIComponent(body)}`;
       note.textContent = "Couldn't send directly, so your email app should open with the message ready.";
     } finally { btn.disabled = false; }
   });

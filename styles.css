@@ -50,6 +50,7 @@ section{position:relative}
 .brand span{color:var(--pink)}
 .nav ul{display:flex;gap:34px}
 .nav ul a{font-size:.9rem;color:var(--ink);opacity:.8;position:relative;padding:4px 0}
+.menu-cta{display:none}
 .nav ul a::after{content:"";position:absolute;left:0;bottom:0;height:1px;width:100%;background:var(--grad);transform:scaleX(0);transform-origin:left;transition:transform .4s var(--ease)}
 .nav ul a:hover{opacity:1}.nav ul a:hover::after{transform:scaleX(1)}
 .burger{display:none;width:44px;height:44px;position:relative}
@@ -290,6 +291,9 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--pink);ba
   .nav nav.open{opacity:1;pointer-events:auto}
   .nav ul{flex-direction:column;align-items:center;gap:26px}
   .nav ul a{font:300 2.2rem var(--serif);opacity:1}
+  .menu-cta{display:block;margin-top:10px}
+  .nav ul .menu-cta a{font:700 1rem var(--sans);color:#fff;padding:15px 30px}
+  .nav ul .menu-cta a::after{display:none}
   .burger{z-index:2}
   .hero{padding-bottom:90px}
   .scroll-cue{display:none}
@@ -298,7 +302,7 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--pink);ba
   .row .spots{grid-column:2}.row .btn{grid-column:2;justify-self:start;margin-top:6px}
   .cards{grid-template-columns:1fr}
   .basics-grid{grid-template-columns:1fr}
-  .basic{border-right:0;border-bottom:1px solid var(--line)}
+  .basic{border-right:0;border-bottom:1px solid var(--line);padding-inline:2px}
   .basic:nth-child(n+3){border-top:0}
   .masonry{grid-auto-rows:190px}
   .stage-shade{background:linear-gradient(180deg,rgba(12,3,20,.8),rgba(60,5,80,.7))}

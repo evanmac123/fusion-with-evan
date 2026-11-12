@@ -1,4 +1,4 @@
-# Afterglow — dance teacher website
+# Fusion with Evan — dance teacher website
 
 A one-page static site (HTML, CSS, vanilla JS). No build step.
 

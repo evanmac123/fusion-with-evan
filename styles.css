@@ -108,6 +108,20 @@ section{position:relative}
 .pillar h3{margin:6px 0 10px;font-size:2.1rem}
 .pillar p{color:var(--mute)}
 
+/* foundations */
+.basics{padding-top:0}
+.basics-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--line)}
+.basic{position:relative;padding:34px 26px 38px;border-right:1px solid var(--line);transition:background .5s}
+.basic:last-child{border-right:0}
+.basic:hover{background:linear-gradient(180deg,rgba(255,61,189,.12),transparent)}
+.basic svg{width:56px;height:56px;fill:none;stroke:url(#g);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;color:var(--pink);stroke:currentColor;margin-bottom:26px;transition:transform .6s var(--ease)}
+.basic svg circle{fill:none}
+.basic:hover svg{transform:translateY(-4px) rotate(-4deg);color:var(--blush)}
+.basic h3{font-size:2.6rem;margin:6px 0 14px}
+.basic p{color:var(--mute);font-size:.96rem;margin-bottom:22px}
+.basic ul{font-size:.88rem}
+.basic li{padding:8px 0;border-top:1px solid var(--line);color:var(--blush)}
+
 /* classes */
 .classes{background:linear-gradient(180deg,var(--bg),#1a0728 50%,var(--bg));padding-block:clamp(70px,10vw,140px)}
 .cards{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
@@ -259,6 +273,9 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--pink);ba
 /* responsive */
 @media (max-width:1020px){
   .cards{grid-template-columns:repeat(2,1fr)}
+  .basics-grid{grid-template-columns:repeat(2,1fr)}
+  .basic:nth-child(2){border-right:0}
+  .basic:nth-child(n+3){border-top:1px solid var(--line)}
   .pillars{grid-template-columns:1fr}.pillar:nth-child(2){margin-top:0}
   .pillar-img{aspect-ratio:16/10}
   .about-grid,.contact-grid{grid-template-columns:1fr}
@@ -280,6 +297,9 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--pink);ba
   .row{grid-template-columns:90px 1fr;gap:6px 16px}
   .row .spots{grid-column:2}.row .btn{grid-column:2;justify-self:start;margin-top:6px}
   .cards{grid-template-columns:1fr}
+  .basics-grid{grid-template-columns:1fr}
+  .basic{border-right:0;border-bottom:1px solid var(--line)}
+  .basic:nth-child(n+3){border-top:0}
   .masonry{grid-auto-rows:190px}
   .stage-shade{background:linear-gradient(180deg,rgba(12,3,20,.8),rgba(60,5,80,.7))}
   .form{padding:24px}

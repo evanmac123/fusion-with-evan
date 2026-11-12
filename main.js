@@ -109,14 +109,29 @@
   addEventListener('keydown', e => { if (e.key === 'Escape' && !lb.hidden) closeLb(); });
 
   // form (static site: opens the visitor's email client; swap for Formspree/Netlify etc. when ready)
-  const form = $('#form'), note = $('.form-note');
-  form.addEventListener('submit', e => {
+  const form = $('#form'), note = $('.form-note'), TO = 'evanmceldowney@gmail.com';
+  $$('.row a.btn').forEach(a => a.addEventListener('click', () => {
+    const t = $('h3', a.closest('.row')).textContent;
+    const opt = [...form.topic.options].find(o => t.startsWith(o.text));
+    if (opt) form.topic.value = opt.value;
+    form.msg.value = `I'd like to reserve a spot: ${t}.`;
+  }));
+  form.addEventListener('submit', async e => {
     e.preventDefault();
     const d = Object.fromEntries(new FormData(form));
     if (!d.name.trim() || !/^\S+@\S+\.\S+$/.test(d.email)) { note.textContent = 'Please add your name and a valid email.'; return; }
-    const body = `Name: ${d.name}\nEmail: ${d.email}\nInterested in: ${d.topic}\n\n${d.msg || ''}`;
-    location.href = `mailto:hello@afterglow.dance?subject=${encodeURIComponent('Dance enquiry: ' + d.topic)}&body=${encodeURIComponent(body)}`;
-    note.textContent = 'Thank you! Your email app should open with your message ready to send.';
+    const btn = $('button[type=submit]', form); btn.disabled = true; note.textContent = 'Sending…';
+    try {
+      const r = await fetch('https://formsubmit.co/ajax/' + TO, {
+        method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(d)
+      });
+      if (!r.ok) throw new Error(r.status);
+      form.reset(); note.textContent = 'Thank you! Your message is on its way. I reply personally, usually within a day.';
+    } catch {
+      const body = `Name: ${d.name}\nEmail: ${d.email}\nInterested in: ${d.topic}\n\n${d.msg || ''}`;
+      location.href = `mailto:${TO}?subject=${encodeURIComponent('Fusion dance enquiry: ' + d.topic)}&body=${encodeURIComponent(body)}`;
+      note.textContent = "Couldn't send directly, so your email app should open with the message ready.";
+    } finally { btn.disabled = false; }
   });
 
   $('#yr').textContent = new Date().getFullYear();

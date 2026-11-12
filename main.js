@@ -97,17 +97,6 @@
   const start = () => { clearInterval(timer); if (!reduce) timer = setInterval(() => show((qi + 1) % qs.length), 6500); };
   show(0); start();
 
-  // lightbox
-  const lb = $('#lb'), lbImg = $('img', lb), lbCap = $('figcaption', lb);
-  let last;
-  $$('.tile').forEach(t => t.addEventListener('click', () => {
-    last = t; lbImg.src = t.dataset.src; lbImg.alt = $('img', t).alt; lbCap.textContent = t.dataset.cap;
-    lb.hidden = false; $('.lb-close', lb).focus(); document.body.style.overflow = 'hidden';
-  }));
-  const closeLb = () => { lb.hidden = true; document.body.style.overflow = ''; last && last.focus(); };
-  lb.addEventListener('click', e => { if (e.target === lb || e.target.classList.contains('lb-close')) closeLb(); });
-  addEventListener('keydown', e => { if (e.key === 'Escape' && !lb.hidden) closeLb(); });
-
   // form (static site: opens the visitor's email client; swap for Formspree/Netlify etc. when ready)
   const form = $('#form'), note = $('.form-note'), TO = 'evanmceldowney@gmail.com';
   $$('.row a.btn').forEach(a => a.addEventListener('click', () => {
